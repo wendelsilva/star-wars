@@ -21,4 +21,3 @@ Executar FrontEnd
 ```
 npm run dev
 ```
-## Vercel
