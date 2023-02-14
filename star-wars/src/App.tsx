@@ -18,6 +18,7 @@ type StarWarsApi = {
 
 export function App() {
   const [starWarsApi, setStarWarsApi] = useState<StarWarsApi>()
+  const [characterName, setCharacterName] = useState("")
 
   useEffect(() => {
     api.get("/people").then(response => {
@@ -37,15 +38,43 @@ export function App() {
     })
   }
 
+  function searchCharacter(name: string) {
+    setCharacterName(name)
+    starWarsApi?.results.map((character, index) => {
+      let names = []
+      names.push(character.name.toLocaleLowerCase())
+      if(names.includes(name.toLocaleLowerCase())) {
+        console.log(index);
+      }
+    });
+  }
+
   return (
     <main className="flex flex-col gap-8 items-center">
       <Logo />
+
       <div className="flex items-center w-[400px] bg-zinc-900 rounded pl-2">
         <MagnifyingGlass size={24} className="text-star-wars"/>
-        <input type="text" placeholder="Buscar personagem" className="w-full py-3 pl-2 bg-transparent rounded placeholder-zinc-400"/>
+        <input 
+          type="text" 
+          placeholder="Buscar personagem" 
+          className="w-full py-3 pl-2 bg-transparent rounded placeholder-zinc-400"
+          value={characterName}
+          onChange={(e) => setCharacterName(e.target.value)}
+        />
       </div>
+
       <div className="flex flex-wrap gap-2 w-[912px]">
         {
+          characterName ? starWarsApi?.results.map((character, index) => {
+            let imageId = character.url.split('/')[5]
+            if(characterName.toLocaleLowerCase().includes(character.name.toLocaleLowerCase())) {
+              return (
+                <CharacterCard key={index} name={character.name} image={`https://starwars-visualguide.com/assets/img/characters/${imageId}.jpg`} />
+              )
+            }
+          }) 
+          :
           starWarsApi?.results.map((character, index) => {
             let imageId = character.url.split('/')[5]
             return (
