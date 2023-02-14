@@ -11,6 +11,9 @@ module.exports = {
       },
       backgroundImage: {
         'death-star': "url('./src/assets/death-star-background.jpg')",
+      },
+      colors: {
+        'star-wars': "#FFC500"
       }
     },
   },
