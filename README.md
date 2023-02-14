@@ -1,4 +1,4 @@
-![imagem da tela principal]()
+![imagem da tela principal](https://github.com/wendelsilva/star-wars/blob/main/main.png?raw=true)
 # Web Calendar
 ## smartnx-challenge
 
@@ -22,4 +22,3 @@ Executar FrontEnd
 npm run dev
 ```
 ## Vercel
-
